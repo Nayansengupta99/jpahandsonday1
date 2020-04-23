@@ -17,7 +17,7 @@ public class CountryService {
 	CountryRepository countryRepository;
 	
 	@Transactional
-	public List<Country> getAllCountries(){
+	public Iterable<Country> getAllCountries(){
 		return countryRepository.findAll();
 	}
 	
@@ -48,4 +48,23 @@ public class CountryService {
 	public void deleteCountry(String code) {
 		countryRepository.deleteById(code);
 	}
+	@Transactional
+
+	 public List<Country> findByName() throws CountryNotFoundException {
+
+	 List<Country> result = countryRepository.findByName("ou");
+
+
+
+	 Country country = result.get(0);
+
+
+
+	 countryRepository.save(country);
+
+	 return result;
+
+
+
+	 }
 }

@@ -28,21 +28,27 @@ public class OrmLearnApplication {
 		countryService = context.getBean(CountryService.class);
 	System.out.println("hello");
 	LOGGER.info("Inside main");
-	testGetAllCountries();
+	//testGetAllCountries();
+	try {
+		testFindByNameContains();
+	} catch (CountryNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	
 	}
 	private static void testGetAllCountries() {
 
 		LOGGER.info("Start");
 
-		List<Country> countries = countryService.getAllCountries();
+		Iterable<Country> countries = countryService.getAllCountries();
 
 		LOGGER.debug("countries={}", countries);
 
 		LOGGER.info("End");
 
 		}
-	public static void testGetCountry() throws CountryNotFoundException {
+	/*public static void testGetCountry() throws CountryNotFoundException {
 		LOGGER.info("Start");
 		Country country = countryService.findCountryByCode("IN");
 		LOGGER.debug("Country:{}", country);
@@ -76,6 +82,21 @@ public class OrmLearnApplication {
 		LOGGER.info("SS deleted");
 		testGetAllCountries();
 		LOGGER.info("End");
-	}
+	}*/
+	public static void testFindByNameContains() throws CountryNotFoundException {
+
+		 LOGGER.info("Start");
+
+		 List<Country> result= countryService.findByName();
+
+		  result.forEach(System.out::println);
+
+
+
+		 LOGGER.info("End");
+
+
+
+		 }
 
 }
